@@ -1,1 +1,4 @@
 # DiagnalAssessmentTest
+
+Points
+
