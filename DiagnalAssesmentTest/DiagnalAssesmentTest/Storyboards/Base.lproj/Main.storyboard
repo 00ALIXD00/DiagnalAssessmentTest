@@ -16,7 +16,7 @@
         <!--Movie ListingVC-->
         <scene sceneID="FRK-e8-ibW">
             <objects>
-                <viewController storyboardIdentifier="MovieListingVC" id="XVL-ga-roD" customClass="MovieListingVC" customModule="DiagnalAssesmentTest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieListingVC" id="XVL-ga-roD" customClass="MovieListingVC" customModule="StarWebTV" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p44-ek-egz">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,13 +28,13 @@
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="16" minY="40" maxX="16" maxY="26"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="AZf-sI-rci">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="t9z-C5-bvD">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="cell" id="9ck-Kb-Qxf">
+                                        <rect key="frame" x="16" y="40" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="szC-nw-zcB">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
@@ -45,54 +45,70 @@
                                 <rect key="frame" x="0.0" y="47" width="428" height="50"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_bar" translatesAutoresizingMaskIntoConstraints="NO" id="4Sn-Ys-u88">
-                                        <rect key="frame" x="0.0" y="12" width="428" height="50"/>
+                                        <rect key="frame" x="0.0" y="16" width="428" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Omt-Cd-ivV"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1x-5y-mci">
-                                        <rect key="frame" x="382" y="12" width="26" height="26"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="26" id="PzT-6c-ISX"/>
-                                            <constraint firstAttribute="height" constant="26" id="mUd-iG-IVQ"/>
-                                        </constraints>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="" image="search"/>
-                                        <connections>
-                                            <action selector="btnSearchTap:" destination="XVL-ga-roD" eventType="touchUpInside" id="5as-sP-HTN"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWj-Nw-RUU">
-                                        <rect key="frame" x="20" y="12" width="26" height="26"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="26" id="gTc-ha-4Ao"/>
-                                            <constraint firstAttribute="width" constant="26" id="vGf-bS-QtV"/>
-                                        </constraints>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="" image="Back"/>
-                                        <connections>
-                                            <action selector="btnBackTap:" destination="XVL-ga-roD" eventType="touchUpInside" id="TpB-sy-bpg"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Romantic Comedy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D97-6G-5bt">
-                                        <rect key="frame" x="66.000000000000014" y="8.3333333333333357" width="168.33333333333337" height="33.666666666666664"/>
-                                        <fontDescription key="fontDescription" name="TitilliumWeb-Regular" family="Titillium Web" pointSize="22"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="OaA-v3-6Dm">
+                                        <rect key="frame" x="20" y="8.3333333333333357" width="388" height="33.666666666666664"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWj-Nw-RUU">
+                                                <rect key="frame" x="0.0" y="3.6666666666666643" width="26" height="26"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="26" id="gTc-ha-4Ao"/>
+                                                    <constraint firstAttribute="width" constant="26" id="vGf-bS-QtV"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="" image="Back"/>
+                                                <connections>
+                                                    <action selector="btnBackTap:" destination="XVL-ga-roD" eventType="touchUpInside" id="TpB-sy-bpg"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Romantic Comedy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D97-6G-5bt">
+                                                <rect key="frame" x="46" y="0.0" width="296" height="33.666666666666664"/>
+                                                <fontDescription key="fontDescription" name="TitilliumWeb-Regular" family="Titillium Web" pointSize="22"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <searchBar hidden="YES" contentMode="redraw" barStyle="black" searchBarStyle="minimal" placeholder="Search your favorite shows.." translatesAutoresizingMaskIntoConstraints="NO" id="vC7-al-8lr">
+                                                <rect key="frame" x="352" y="-1.3333333333333357" width="0.0" height="36"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="36" id="yDT-ID-bFF"/>
+                                                </constraints>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="XVL-ga-roD" id="8hL-09-7Ir"/>
+                                                </connections>
+                                            </searchBar>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1x-5y-mci">
+                                                <rect key="frame" x="362" y="3.6666666666666643" width="26" height="26"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="26" id="PzT-6c-ISX"/>
+                                                    <constraint firstAttribute="height" constant="26" id="mUd-iG-IVQ"/>
+                                                </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="" image="search"/>
+                                                <state key="selected" image="xmark" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="black"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="btnSearchTap:" destination="XVL-ga-roD" eventType="touchUpInside" id="5as-sP-HTN"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="4Sn-Ys-u88" secondAttribute="trailing" id="0kW-Zh-YhO"/>
-                                    <constraint firstAttribute="trailing" secondItem="A1x-5y-mci" secondAttribute="trailing" constant="20" symbolic="YES" id="0lT-ut-tN8"/>
-                                    <constraint firstItem="TWj-Nw-RUU" firstAttribute="leading" secondItem="UgJ-BC-NrT" secondAttribute="leading" constant="20" id="1s7-It-obW"/>
                                     <constraint firstAttribute="height" constant="50" id="ATn-re-1Eq"/>
-                                    <constraint firstItem="4Sn-Ys-u88" firstAttribute="top" secondItem="UgJ-BC-NrT" secondAttribute="top" constant="12" id="HeJ-lD-car"/>
-                                    <constraint firstItem="A1x-5y-mci" firstAttribute="centerY" secondItem="UgJ-BC-NrT" secondAttribute="centerY" id="TMo-dS-ZZj"/>
+                                    <constraint firstItem="4Sn-Ys-u88" firstAttribute="top" secondItem="UgJ-BC-NrT" secondAttribute="top" constant="16" id="HeJ-lD-car"/>
+                                    <constraint firstItem="OaA-v3-6Dm" firstAttribute="leading" secondItem="UgJ-BC-NrT" secondAttribute="leading" constant="20" symbolic="YES" id="HiA-HD-F8H"/>
+                                    <constraint firstItem="OaA-v3-6Dm" firstAttribute="centerY" secondItem="UgJ-BC-NrT" secondAttribute="centerY" id="INd-ag-PMR"/>
                                     <constraint firstItem="4Sn-Ys-u88" firstAttribute="leading" secondItem="UgJ-BC-NrT" secondAttribute="leading" id="bOr-UU-hIZ"/>
-                                    <constraint firstItem="TWj-Nw-RUU" firstAttribute="centerY" secondItem="UgJ-BC-NrT" secondAttribute="centerY" id="mJv-1I-q0L"/>
-                                    <constraint firstItem="D97-6G-5bt" firstAttribute="centerY" secondItem="UgJ-BC-NrT" secondAttribute="centerY" id="s2P-KM-gok"/>
-                                    <constraint firstItem="D97-6G-5bt" firstAttribute="leading" secondItem="TWj-Nw-RUU" secondAttribute="trailing" constant="20" id="vLB-E8-eUr"/>
+                                    <constraint firstAttribute="trailing" secondItem="OaA-v3-6Dm" secondAttribute="trailing" constant="20" symbolic="YES" id="in1-Sr-ePB"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -113,6 +129,7 @@
                         <outlet property="btnSearch" destination="A1x-5y-mci" id="484-04-CZf"/>
                         <outlet property="cvMovieListing" destination="NUV-aD-8kP" id="ebg-hm-LJX"/>
                         <outlet property="lblTitle" destination="D97-6G-5bt" id="4Ge-QU-Wfb"/>
+                        <outlet property="txtSearch" destination="vC7-al-8lr" id="86O-zL-jC7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2xT-Zh-xna" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -124,5 +141,6 @@
         <image name="Back" width="48" height="48"/>
         <image name="nav_bar" width="1080" height="168"/>
         <image name="search" width="54" height="54"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
     </resources>
 </document>

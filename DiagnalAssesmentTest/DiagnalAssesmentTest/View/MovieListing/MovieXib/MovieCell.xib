@@ -14,7 +14,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MovieCell" customModule="DiagnalAssesmentTest" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MovieCell" customModule="StarWebTV" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="163" height="249"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -24,7 +24,7 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="poster2" translatesAutoresizingMaskIntoConstraints="NO" id="c0A-X1-yAQ">
                         <rect key="frame" x="0.0" y="0.0" width="163" height="199.33333333333334"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Birds with an Extra Long Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZTO-JI-pE9">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Birds with an Extra Long Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" showsExpansionTextWhenTruncated="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTO-JI-pE9" customClass="MarqueeLabel" customModule="StarWebTV" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="207.33333333333334" width="163" height="41.666666666666657"/>
                         <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="18"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -46,7 +46,7 @@
             <size key="customSize" width="163" height="249"/>
             <connections>
                 <outlet property="imgMoviePoster" destination="c0A-X1-yAQ" id="uce-Jo-gel"/>
-                <outlet property="lblMovieName" destination="ZTO-JI-pE9" id="adD-wh-e9c"/>
+                <outlet property="lblMovieName" destination="ZTO-JI-pE9" id="2XL-aX-CRR"/>
             </connections>
             <point key="canvasLocation" x="193.12977099236642" y="88.380281690140848"/>
         </collectionViewCell>
