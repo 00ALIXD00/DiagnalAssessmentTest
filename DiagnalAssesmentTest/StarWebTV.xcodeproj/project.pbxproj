@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E82222092AA1F417008F4BD6 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82222082AA1F417008F4BD6 /* UICollectionView+Extension.swift */; };
+		E822220C2AA1FAE1008F4BD6 /* SkeletonLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = E822220B2AA1FAE1008F4BD6 /* SkeletonLoading.swift */; };
+		E822220E2AA2F7C3008F4BD6 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E822220D2AA2F7C3008F4BD6 /* UILabel+Extension.swift */; };
 		E84B2E632AA0944A00270C85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84B2E622AA0944A00270C85 /* AppDelegate.swift */; };
 		E84B2E652AA0944A00270C85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84B2E642AA0944A00270C85 /* SceneDelegate.swift */; };
 		E84B2E6A2AA0944A00270C85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E84B2E682AA0944A00270C85 /* Main.storyboard */; };
@@ -48,6 +51,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E82222082AA1F417008F4BD6 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
+		E822220B2AA1FAE1008F4BD6 /* SkeletonLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonLoading.swift; sourceTree = "<group>"; };
+		E822220D2AA2F7C3008F4BD6 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		E84B2E5F2AA0944A00270C85 /* StarWebTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarWebTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E84B2E622AA0944A00270C85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E84B2E642AA0944A00270C85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +105,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E82222072AA1F3FE008F4BD6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E84B2EC22AA11A3900270C85 /* UIViewcontroller+Extension.swift */,
+				E82222082AA1F417008F4BD6 /* UICollectionView+Extension.swift */,
+				E822220D2AA2F7C3008F4BD6 /* UILabel+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E822220A2AA1FAD0008F4BD6 /* SkeletonLoading */ = {
+			isa = PBXGroup;
+			children = (
+				E822220B2AA1FAE1008F4BD6 /* SkeletonLoading.swift */,
+			);
+			path = SkeletonLoading;
+			sourceTree = "<group>";
+		};
 		E84B2E562AA0944A00270C85 = {
 			isa = PBXGroup;
 			children = (
@@ -135,10 +159,11 @@
 		E84B2E762AA0970300270C85 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E822220A2AA1FAD0008F4BD6 /* SkeletonLoading */,
+				E82222072AA1F3FE008F4BD6 /* Extensions */,
 				E84B2EBD2AA1163800270C85 /* Toast */,
 				E84B2E772AA0971700270C85 /* Fonts */,
 				E84B2EC02AA1173500270C85 /* Helper.swift */,
-				E84B2EC22AA11A3900270C85 /* UIViewcontroller+Extension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -365,14 +390,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				E84B2E632AA0944A00270C85 /* AppDelegate.swift in Sources */,
+				E82222092AA1F417008F4BD6 /* UICollectionView+Extension.swift in Sources */,
 				E84B2EBF2AA1165200270C85 /* Toast.swift in Sources */,
 				E84B2EC32AA11A3900270C85 /* UIViewcontroller+Extension.swift in Sources */,
 				E84B2EA62AA0B3C100270C85 /* MovieListingModel.swift in Sources */,
 				E84B2E652AA0944A00270C85 /* SceneDelegate.swift in Sources */,
 				E84B2EA32AA0AAEA00270C85 /* MovieListingVC.swift in Sources */,
+				E822220C2AA1FAE1008F4BD6 /* SkeletonLoading.swift in Sources */,
 				E84B2EC12AA1173500270C85 /* Helper.swift in Sources */,
 				E84B2EA02AA0A86900270C85 /* MovieCell.swift in Sources */,
 				E84B2EBC2AA10F0400270C85 /* MovieViewModel.swift in Sources */,
+				E822220E2AA2F7C3008F4BD6 /* UILabel+Extension.swift in Sources */,
 				E84B2E8F2AA0977900270C85 /* FontBook.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

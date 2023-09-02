@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NUV-aD-8kP">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NUV-aD-8kP">
                                 <rect key="frame" x="0.0" y="77" width="428" height="849"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0W2-7G-aX6">
@@ -111,16 +111,34 @@
                                     <constraint firstAttribute="trailing" secondItem="OaA-v3-6Dm" secondAttribute="trailing" constant="20" symbolic="YES" id="in1-Sr-ePB"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wcN-8m-SIF">
+                                <rect key="frame" x="0.0" y="868" width="428" height="58"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="iFf-tX-6Uy">
+                                        <rect key="frame" x="195.66666666666666" y="4" width="37" height="37"/>
+                                        <color key="color" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="YrB-wz-mH8"/>
+                                    <constraint firstItem="iFf-tX-6Uy" firstAttribute="top" secondItem="wcN-8m-SIF" secondAttribute="top" constant="4" id="eB0-hb-t7K"/>
+                                    <constraint firstItem="iFf-tX-6Uy" firstAttribute="centerX" secondItem="wcN-8m-SIF" secondAttribute="centerX" id="mzF-1P-I72"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZRU-sW-nzy"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="wcN-8m-SIF" secondAttribute="bottom" id="1lc-nG-03d"/>
                             <constraint firstItem="NUV-aD-8kP" firstAttribute="trailing" secondItem="ZRU-sW-nzy" secondAttribute="trailing" id="4l4-5K-a2C"/>
                             <constraint firstItem="ZRU-sW-nzy" firstAttribute="trailing" secondItem="UgJ-BC-NrT" secondAttribute="trailing" id="5X4-Qt-gkX"/>
                             <constraint firstItem="NUV-aD-8kP" firstAttribute="top" secondItem="UgJ-BC-NrT" secondAttribute="bottom" constant="-20" id="Wzy-Vk-JXh"/>
                             <constraint firstItem="UgJ-BC-NrT" firstAttribute="leading" secondItem="ZRU-sW-nzy" secondAttribute="leading" id="Z1I-0w-1Bg"/>
                             <constraint firstAttribute="bottom" secondItem="NUV-aD-8kP" secondAttribute="bottom" id="aNS-aW-OQb"/>
                             <constraint firstItem="UgJ-BC-NrT" firstAttribute="top" secondItem="ZRU-sW-nzy" secondAttribute="top" id="dJW-fj-pHY"/>
+                            <constraint firstItem="ZRU-sW-nzy" firstAttribute="trailing" secondItem="wcN-8m-SIF" secondAttribute="trailing" id="fdj-jm-4SG"/>
+                            <constraint firstItem="wcN-8m-SIF" firstAttribute="leading" secondItem="ZRU-sW-nzy" secondAttribute="leading" id="jb8-T2-hYr"/>
                             <constraint firstItem="NUV-aD-8kP" firstAttribute="leading" secondItem="ZRU-sW-nzy" secondAttribute="leading" id="xIf-ef-BG0"/>
                         </constraints>
                     </view>
@@ -130,6 +148,7 @@
                         <outlet property="cvMovieListing" destination="NUV-aD-8kP" id="ebg-hm-LJX"/>
                         <outlet property="lblTitle" destination="D97-6G-5bt" id="4Ge-QU-Wfb"/>
                         <outlet property="txtSearch" destination="vC7-al-8lr" id="86O-zL-jC7"/>
+                        <outlet property="vwLoading" destination="wcN-8m-SIF" id="aoT-qT-oTl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2xT-Zh-xna" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -67,6 +67,7 @@ class ToastAlert {
             statusImage.image = alertCheckImg
         }
 
+        statusImage.tintColor = .white
         statusImage.layer.cornerRadius = 15
         statusImage.clipsToBounds = true
 

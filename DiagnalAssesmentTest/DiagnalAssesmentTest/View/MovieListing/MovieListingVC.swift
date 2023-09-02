@@ -15,18 +15,31 @@ class MovieListingVC: UIViewController {
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var btnSearch: UIButton!
     @IBOutlet weak var txtSearch: UISearchBar!
+    @IBOutlet weak var vwLoading: UIView!
     
     //MARK: - Properties
     var viewModel = MovieViewModel()
     var isSearching: Bool = false
     var filteredMovies: [Content] = [] // Filtered movies based on search
-    var allMovies: [Content]?  // Your json response movie list
+    var allMovies: [Content]? {  // All movie list from json response
+        didSet {
+            self.cvMovieListing.reloadCollectionWithAnimation()
+        }
+    }
     
     //MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         observeDataCallbackFromViewModel() // This will observe view models events
         setupUI() // set initial user interface and delegates
+    }
+    
+    // This method will call when user switch orientation
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        // This will reset flow layout and reload collection view
+        cvMovieListing.collectionViewLayout.invalidateLayout()
+        cvMovieListing.reloadCollectionWithAnimation()
     }
     
     //MARK: - Actions
@@ -37,9 +50,9 @@ class MovieListingVC: UIViewController {
     @IBAction func btnSearchTap(_ sender: UIButton) {
         // Show search bar and hide search button
         if sender.isSelected {
-            searchBar(makeItVisible: false)
+            searching(isStart: false) // Searching stops
         } else {
-            searchBar(makeItVisible: true)
+            searching(isStart: true) // Searching starts
         }
     }
     
@@ -59,22 +72,33 @@ extension MovieListingVC {
         txtSearch.delegate = self
         
         // Load Json data
-        viewModel.loadMovieList()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // It will call loadMovieList function after 2.0 seconds delay so user can see data is being fetched
+            self.viewModel.loadMovieList()
+        }
     }
     
-    func searchBar(makeItVisible: Bool) {
-        UIView.animate(withDuration: 0.3) {
-            self.lblTitle.isHidden = makeItVisible
-            self.btnBack.isHidden = makeItVisible
-            self.txtSearch.isHidden = !makeItVisible
-            self.btnSearch.isSelected = makeItVisible
+    func searching(isStart: Bool) {
+
+        UIView.animate(withDuration: 0.5,
+                       delay: 0,
+                       usingSpringWithDamping: 0.8,
+                       initialSpringVelocity: 0.5,
+                       options: [.curveEaseInOut, .beginFromCurrentState],
+                       animations: {
+            self.btnBack.alpha = isStart ? 0.0 : 1.0
+            self.btnBack.isHidden = isStart
+            self.lblTitle.alpha = isStart ? 0.0 : 1.0
+            self.lblTitle.isHidden = isStart
+            self.txtSearch.isHidden = !isStart
+            self.btnSearch.isSelected = isStart
             self.view.layoutIfNeeded()
-        }
-        makeItVisible ? txtSearch.becomeFirstResponder() : txtSearch.resignFirstResponder()
-        isSearching = makeItVisible
-        isSearching ? Void() : cvMovieListing.reloadData()
-        txtSearch.text = ""
+        }, completion: nil)
         
+        isStart ? txtSearch.becomeFirstResponder() : txtSearch.resignFirstResponder()
+        isSearching = isStart
+        isSearching ? Void() : cvMovieListing.reloadCollectionWithAnimation()
+        txtSearch.text = ""
+        cvMovieListing.setEmptyMessage("")
     }
     
 }
@@ -87,7 +111,7 @@ extension MovieListingVC {
         // When you get data from api, view model would let you know and give call back and send data, so you can update User interface
         viewModel.movieListCallBack = { [weak self] items in
             guard let self else { return }
-            
+            vwLoading.isHidden = true
             if let _ = allMovies {
                 self.allMovies?.append(contentsOf: items?.page?.contentItems?.content ?? [])
             } else {
@@ -100,6 +124,7 @@ extension MovieListingVC {
             guard let self else { return }
             
             // we should not show such messages to user, i am just showing these toast messages for your understanding and for sake of error handling, we should rather show user appropriate error messages.
+            vwLoading.isHidden = true
             if let error { // Decode fail
                 self.showToast(message: "Json decode fail with errors \(error.localizedDescription)")
             } else { // Json file not found
@@ -114,28 +139,49 @@ extension MovieListingVC {
 extension MovieListingVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
         if isSearching {
             return // if user is searching, return from here no need to execute below code
         }
         let lastItem = (allMovies?.count ?? 0) - 1
         if indexPath.row == lastItem {
             if viewModel.hasMoreData {
-                // If api has more data, increment page count and load more data
-                viewModel.currentPage += 1
-                viewModel.loadMovieList()
+                // I am giving 1.5 second delay so we can observe data is being load from json file, if i don't do this it will load data instantly from bundle
+                vwLoading.isHidden = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    // If api has more data, increment page count and load more data
+                    self.viewModel.currentPage += 1
+                    self.viewModel.loadMovieList()
+                }
             }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return isSearching ? filteredMovies.count : allMovies?.count ?? 0
+        if isSearching {
+            return filteredMovies.count // this is search result items count
+        } else {
+            if let allMovies {
+                return allMovies.count // when we get dat from api, return data count
+            } else {
+                return 12 // if api is calling and fetching data from server, we should show skeleton loading
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.cellID, for: indexPath) as? MovieCell ?? MovieCell()
         
-        cell.movieData = isSearching ? filteredMovies[indexPath.row] : allMovies?[indexPath.row]
-        
+        if isSearching {
+            cell.movieData = filteredMovies[indexPath.row]
+        } else {
+            if let allMovies { // it will give us all movies, so we can show list of movies
+                cell.movieData = allMovies[indexPath.row]
+                cell.stopCollSkeleton()
+            } else { // if we get no movies that means api is calling so we should show skeleton loading until data fetching finishes
+                cell.startCollSkeleton()
+            }
+        }
         return cell
     }
     
@@ -144,20 +190,31 @@ extension MovieListingVC: UICollectionViewDelegate, UICollectionViewDataSource {
 //MARK: - Collection view flow layout delegate  NOTE:- We can achieve spacing in between cell using storyboard too, but i prefer to do it this way as this is easy for other developer to understand directly from ViewController class without going in to storyboard
 extension MovieListingVC: UICollectionViewDelegateFlowLayout {
     
+    // Size for Cell
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (view.layer.frame.size.width - 64) / 3
+        
+        var width: CGFloat = 0.0
+        if UIDevice.current.orientation.isLandscape { // check if the device orientation is portrait or landscape?
+            width = (view.layer.frame.size.width - 112) / 6
+        } else {
+            width = (view.layer.frame.size.width - 64) / 3
+        }
+        
         let height = width + (width / 1.2)
         return CGSize(width: width, height: height)
     }
     
+    // Section spacing around whole collection view
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return .init(top: 40, left: 16, bottom: 26, right: 16)
     }
     
+    // Spacing in between rows
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 36
     }
     
+    // Spacing in between items
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 16
     }
@@ -170,6 +227,12 @@ extension MovieListingVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.count >= 3 || searchText.isEmpty {
             filteredMovies = allMovies?.filter( {$0.name?.localizedCaseInsensitiveContains(searchText) ?? Bool()} ) ?? []
+            
+            if !(filteredMovies.count > 0) && !searchText.isEmpty {
+                cvMovieListing.setEmptyMessage("We found nothing named \"\(txtSearch.text ?? "")\", \nPlease try again with different movie name.", image: "no-results") // No data view here for search
+            } else {
+                cvMovieListing.setEmptyMessage("") // pass empty string if there is data to show
+            }
             
             cvMovieListing.performBatchUpdates({
                 cvMovieListing.reloadSections(IndexSet(integer: 0))
