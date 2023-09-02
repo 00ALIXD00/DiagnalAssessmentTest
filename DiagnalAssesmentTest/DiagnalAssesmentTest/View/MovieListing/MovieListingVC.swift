@@ -23,7 +23,7 @@ class MovieListingVC: UIViewController {
     var filteredMovies: [Content] = [] // Filtered movies based on search
     var allMovies: [Content]? {  // All movie list from json response
         didSet {
-            self.cvMovieListing.reloadCollectionWithAnimation()
+            self.cvMovieListing.reloadData()
         }
     }
     
@@ -39,7 +39,7 @@ class MovieListingVC: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
         // This will reset flow layout and reload collection view
         cvMovieListing.collectionViewLayout.invalidateLayout()
-        cvMovieListing.reloadCollectionWithAnimation()
+        cvMovieListing.reloadData()
     }
     
     //MARK: - Actions
@@ -229,7 +229,7 @@ extension MovieListingVC: UISearchBarDelegate {
             filteredMovies = allMovies?.filter( {$0.name?.localizedCaseInsensitiveContains(searchText) ?? Bool()} ) ?? []
             
             if !(filteredMovies.count > 0) && !searchText.isEmpty {
-                cvMovieListing.setEmptyMessage("We found nothing named \"\(txtSearch.text ?? "")\", \nPlease try again with different movie name.", image: "no-results") // No data view here for search
+                cvMovieListing.setEmptyMessage("We found nothing named \"\(txtSearch.text ?? "")\", \nPlease try again with different movie name.", image: "no-results") // This is no data view if user type something that is not in out collection
             } else {
                 cvMovieListing.setEmptyMessage("") // pass empty string if there is data to show
             }
