@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 struct MovieListingResponse: Codable {
     
     var page : Page? = Page()
@@ -31,8 +29,6 @@ struct MovieListingResponse: Codable {
     }
     
 }
-
-import Foundation
 
 struct Page: Codable {
     

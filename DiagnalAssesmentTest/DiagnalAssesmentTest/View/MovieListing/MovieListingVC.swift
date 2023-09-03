@@ -50,6 +50,7 @@ class MovieListingVC: UIViewController {
     @IBAction func btnSearchTap(_ sender: UIButton) {
         // Show search bar and hide search button
         if sender.isSelected {
+            isSearching = false
             searching(isStart: false) // Searching stops
         } else {
             searching(isStart: true) // Searching starts
@@ -94,8 +95,7 @@ extension MovieListingVC {
             self.view.layoutIfNeeded()
         }, completion: nil)
         
-        isStart ? txtSearch.becomeFirstResponder() : txtSearch.resignFirstResponder()
-        isSearching = isStart
+        _ = isStart ? txtSearch.becomeFirstResponder() : txtSearch.resignFirstResponder()
         isSearching ? Void() : cvMovieListing.reloadCollectionWithAnimation()
         txtSearch.text = ""
         cvMovieListing.setEmptyMessage("")
@@ -140,7 +140,7 @@ extension MovieListingVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        if isSearching {
+        if isSearching || !txtSearch.isHidden {
             return // if user is searching, return from here no need to execute below code
         }
         let lastItem = (allMovies?.count ?? 0) - 1
@@ -225,7 +225,8 @@ extension MovieListingVC: UICollectionViewDelegateFlowLayout {
 extension MovieListingVC: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.count >= 3 || searchText.isEmpty {
+        if searchText.count >= 2 {
+            isSearching = true
             filteredMovies = allMovies?.filter( {$0.name?.localizedCaseInsensitiveContains(searchText) ?? Bool()} ) ?? []
             
             if !(filteredMovies.count > 0) && !searchText.isEmpty {
@@ -233,10 +234,13 @@ extension MovieListingVC: UISearchBarDelegate {
             } else {
                 cvMovieListing.setEmptyMessage("") // pass empty string if there is data to show
             }
-            
             cvMovieListing.performBatchUpdates({
                 cvMovieListing.reloadSections(IndexSet(integer: 0))
             }, completion: nil)
+        } else {
+            isSearching = false
+            cvMovieListing.setEmptyMessage("")
+            cvMovieListing.reloadCollectionWithAnimation()
         }
     }
 }
